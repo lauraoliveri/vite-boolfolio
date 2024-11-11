@@ -8,10 +8,12 @@
 // 1) Importazione del componente
 import AppHeader from './components/AppHeader.vue';
 
+import axios from 'axios';
+
 export default {
   data() {
     return { 
-      count: 0
+      projects: []
     }
   },
   // 2) Dichiarazione del componente
@@ -19,8 +21,13 @@ export default {
     AppHeader
   },
   methods: {
-    incrementCount() {
-      this.count++;
+    GetProjects () {
+      axios
+      .get('http://127.0.0.1:8000/api/projects')
+      .then((res)=> {
+        
+        console.log(res.data);
+      });
     }
   }
 }
@@ -32,9 +39,7 @@ export default {
     <AppHeader />
     
     <main>
-      <button class="btn btn-primary" @click="incrementCount()">
-        {{ count }}
-      </button>
+      
     </main>
   </div>
 </template>
